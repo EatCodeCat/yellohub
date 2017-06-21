@@ -63,17 +63,6 @@ $('.am_imglist_user_font').each(
   effect : 'fadeIn'
 });
 
-//@首页 数字跳动
-  var options = {
-  useEasing : true,
-  useGrouping : true,
-  separator : '',
-  decimal : '.',
-  prefix : '',
-  suffix : ''
-};
-var banner_num = new CountUp("banner_num", 956000, 956214, 0, 5, options);
-banner_num.start();
 });
 
 //动画效果

@@ -8,6 +8,10 @@ module.exports = app => {
       let result = yield this.ctx.model.Video.find({}).skip(index*page).limit(page)
       return result
     }
+    * findById (id) {
+      let result = yield this.ctx.model.Video.findById(id)
+      return result
+    }
   }
   return Video
 }
