@@ -26,13 +26,12 @@
             </div>
             <div class="am-video-info">
                 <ul class="am_tuya_r_info">
-                    <li><i class="am-icon-heart"></i><span>10 人喜欢</span></li>
-                    <li><i class="am-icon-comments"></i><span>4 条讨论</span></li>
+                    <li onclick="like('{{entity._id}}')"><i class="am-icon-heart"></i><span>10</span></li>
+                    <li onclick="hate('{{entity._id}}')"><i class="am-icon-thumbs-o-down"></i><span>4</span></li>
                     <li><i class="am-icon-eye"></i><span>126 次查看</span></li>
                 </ul>
                 <div style="clear:both"></div>
                 <div class=tag-title><strong>标签:</strong></div>
-
                 <ul class="am_tuya_tag">
                      {% for tag in entity.tag_list %}
                         <li><a href=""><span>{{tag}}</span></a></li>
@@ -56,7 +55,7 @@
                                 data-original="{{item.thumb_pic}}"
                                 alt="{{item.title}}"/>
                         </a>
-                        <span class=am-item-title>{{item.title}}</span>
+                       <a href="/detail/{{item._id}}" > <span class=am-item-title>{{item.title}}</span></a>
                         <div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span class="am-icon-comments"> 67</span><span class="am_imglist_time">15分钟前</span></div>
                     </div>
                 </li>
@@ -66,8 +65,7 @@
             <!--<a class="like-more">更多喜欢 ></a>-->
         </div>
     </div>
-    
-     <script src="/js/jquery.min.js"></script>
+    <script src="http://vjs.zencdn.net/6.1.0/video.js"></script>
     <script>
         $(function () {
             if ($(window).width() < 600) {
@@ -82,5 +80,5 @@
         });
  
     </script>
-    <script src="http://vjs.zencdn.net/6.1.0/video.js"></script>
+   
     {%endblock%}

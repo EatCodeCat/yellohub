@@ -1,7 +1,9 @@
 'use strict'
 
+
+
 exports.index = function * (ctx) {
-  var data = yield ctx.service.video.findByPage(0, 12)
+  var data = yield ctx.service.video.findByPage(0, 8)
   yield ctx.render('index.html', {list: data})
 }
 exports.detail = function * (ctx) {
@@ -13,7 +15,17 @@ exports.detail = function * (ctx) {
 exports.list = function * (ctx) {
   var page = ctx.params.page || 1
   var data = yield ctx.service.video.findByPage(page, 12)
-  yield ctx.render('list.html', {list: data})
+  console.log(IsPC(ctx.request.header['user-agent']))
+  yield ctx.render('list.html', {list: data, isPC: IsPC(ctx.request.header['user-agent'])})
+}
+
+function IsPC (userAgentInfo) {
+  var Agents = new Array('Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod')
+  var flag = true
+  for (var v = 0; v < Agents.length; v++) {
+    if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+  }
+  return flag
 }
 // module.exports = app => {
 //   class HomeController extends app.Controller {

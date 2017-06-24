@@ -7,7 +7,8 @@ module.exports = app => {
         "poster": String,
         "video_url_list": Array,
         "tag_list": Array,
-        "video_type": String
+        "video_type": String,
+        'update_time':Date
     });
     return mongoose.model('Video', VideoSchema);
 }

@@ -9,23 +9,25 @@
     <link rel="stylesheet" href="/css/amazeui.min.css">
     <link rel="stylesheet" href="/css/petshow.css?6">
     <link rel="stylesheet" href="/css/animate.min.css">
+    <link href="http://vjs.zencdn.net/6.1.0/video-js.css" rel="stylesheet">
+    <script src="/js/jquery.min.js"></script>
 
 </head>
 
 <body>
     <header class="am-topbar am-topbar-inverse">
         <div class="search">
-            <form class="cse-form"> 
-                <input type="text" name="q" placeholder="搜索视频、图片、文章" autocomplete="off"> 
+            <form class="cse-form">
+                <input type="text" name="q" placeholder="搜索视频、图片、文章" autocomplete="off">
                 <button><span class="am-icon-search am-icon-sm"></span></button></form>
         </div>
         <div class="amz-container">
             <h1 class="am-topbar-brand">
                 <a href="#" class="am-topbar-logo">
-                <img src="img/logo.png?1" alt="">
-            </a>
+                    <div class="logo"><strong>Yello</strong><strong>hub</strong></div>
+                </a>
             </h1>
-            
+
             <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse-5'}">
                 <span class="am-sr-only">
                     导航切换
@@ -36,102 +38,49 @@
             <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse-5">
                 <ul class="am-nav am-nav-pills am-topbar-nav">
                     <li class="am-active">
-                        <a href="#">
+                        <a href="/">
                         首页
-                    </a>
+                        </a>
                     </li>
-                    <li class="am-dropdown" data-am-dropdown="">
-                        <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
-                        视频
-                        <span class="am-icon-caret-down">
-                        </span>
-                    </a>
-                        <ul class="am-dropdown-content">
-                            <li>
-                                <a href="#">
-                                编辑推荐
-                            </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                人气排行
-                            </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                最新发布
-                            </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                语音涂鸦
-                            </a>
-                            </li>
-                        </ul>
+                    <li >
+                        <a href="/list/0">
+                        视频列表
+                        </a>
+
                     </li>
-                    <li>
+                    <!--<li >
+                        <a href="/list/0">
+                        视频分类
+                        </a>
+
+                    </li>-->
+                    <!--<li >
+                        <a href="/list/0">
+                        在綫成人影院 
+                        </a>
+                    </li>-->
+                    <!--<li>
                         <a href="#">
-                        新时代的我们
-                    </a>
+                            新时代的我们
+                        </a>
                     </li>
                     <li>
                         <a href="#">
                         达盖尔的旗帜
                     </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
     </header>
     {% block content %}{% endblock %}
     <footer class="am_footer">
-        <div class="am_footer_con">
-            <div class="am_footer_link">
-                <span>关于宠物秀</span>
-                <ul>
-                    <li><a href="###">关于我们</a></li>
-                    <li><a href="###">发展历程</a></li>
-                    <li><a href="###">友情链接</a></li>
-                </ul>
-            </div>
-
-
-            <div class="am_footer_don">
-                <span>宠物秀</span>
-                <dl>
-                    <dt><img src="img/footdon.png?1" alt=""></dt>
-                    <dd>一起Show我们的爱宠吧！宠物秀是图片配文字、涂鸦、COSPLAY的移动手机社区，这里有猫狗鱼龟兔子仓鼠龙猫等各种萌图。
-                        <a href="###" class="footdon_pg ">
-                            <div class="foot_d_pg am-icon-apple "> App store</div>
-                        </a>
-                        <a href="###" class="footdon_az animated">
-                            <div class="foot_d_az am-icon-android "> Android</div>
-                        </a>
-                    </dd>
-
-                </dl>
-            </div>
-
-            <div class="am_footer_erweima">
-                <div class="am_footer_weixin"><img src="img/wx.jpg" alt="">
-
-                    <div class="am_footer_d_gzwx am-icon-weixin"> 关注微信</div>
-                </div>
-                <div class="am_footer_ddon"><img src="img/wx.jpg" alt="">
-
-                    <div class="am_footer_d_dxz am-icon-cloud-download"> 扫码下载</div>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="am_info_line">Copyright(c)2015 <span>PetShow</span> All Rights Reserved</div>
+        <div class="am_info_line">Copyright(c)2017 <span>yellohub</span> All Rights Reserved</div>
     </footer>
-    <script src="/js/petshow.js"></script>
-        <script src="/js/jquery.min.js"></script>
     <script src="/js/amazeui.min.js"></script>
     <script src="/js/countUp.min.js"></script>
     <script src="/js/amazeui.lazyload.min.js"></script>
+    <script src="/js/petshow.js"></script>
 </body>
 
 </html>
