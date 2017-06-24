@@ -1,6 +1,6 @@
-{% extends "layout.html" %} {% block content %}
-
-
+{% extends "layout.html" %} 
+{% block title %}{{title}}{% endblock %}
+{% block content %}
 <div class="am-tabs am-tabs-d2 am_news_tab">
 
   <div class="am-tabs-bd">
@@ -35,7 +35,7 @@
                 </div>
                 {% endif %}
               </div>
-              <a class="list-item-title" href="/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
+              <a class="list-item-title" href="http://www.iyehub.com/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
               <div class="am_listimg_info"><span onclick="like('{{item._id}}')" class="am-icon-heart"> 132</span>
               <span class="am-icon-thumbs-o-down" onclick="hate('{{item._id}}')"> 67</span>
               <span class="am-icon-eye"> 132</span>

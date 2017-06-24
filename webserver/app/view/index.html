@@ -1,4 +1,9 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+ {% block content %}
+
+
 <!--<div class="get">
         <div class="am-g">
             <div class="am-u-lg-12">
@@ -13,13 +18,13 @@
         {% for item in list %}
         <li>
             <div class="am-gallery-item am_list_block">
-                <a href="/detail/{{item._id}}" class="am_img_bg">
+                <a href="http://www.iyehub.com/detail/{{item._id}}" class="am_img_bg">
                     <img class="am_img" src="img/loading.gif"
                          data-original="{{item.thumb_pic}}"
                          alt="{{item.title}}"/>
                 </a>
 
-                <a href="/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
+                <a href="http://www.iyehub.com/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
                 <div class="am_listimg_info"><span class="am-icon-heart"> 132</span>
                     <span class="am-icon-thumbs-o-down"> 67</span>
                     <span class="am-icon-eye"> 67</span><span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
@@ -31,7 +36,7 @@
     </ul>
 </div>
 
-<div class="am-g am-imglist">
+<!--<div class="am-g am-imglist">
     <div class="am-list-title">亚洲唯美
         <a class="am-list-more" href="/list/0"></canvas>更多>></a>
     </div>
@@ -55,8 +60,8 @@
 
 
     </ul>
-</div>
-<div class="am-g am-imglist">
+</div>-->
+<!--<div class="am-g am-imglist">
     <div class="am-list-title">欧美原创
         <a class="am-list-more" href="/list/0"></canvas>更多>></a>
     </div>
@@ -80,5 +85,5 @@
 
 
     </ul>
-</div>
+</div>-->
 {% endblock %}

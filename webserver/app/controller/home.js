@@ -4,19 +4,20 @@
 
 exports.index = function * (ctx) {
   var data = yield ctx.service.video.findByPage(0, 8)
-  yield ctx.render('index.html', {list: data})
+  yield ctx.render('index.html', {list: data, title:"iyehub"})
 }
 exports.detail = function * (ctx) {
   var id = ctx.params.id
   var data = yield ctx.service.video.findByPage(0, 8)
   var entity = yield ctx.service.video.findById(id)
-  yield ctx.render('detail.html', {list: data, entity: entity})
+  yield ctx.render('detail.html', {list: data, entity: entity, title:entity.title})
 }
 exports.list = function * (ctx) {
   var page = ctx.params.page || 1
   var data = yield ctx.service.video.findByPage(page, 12)
   console.log(IsPC(ctx.request.header['user-agent']))
-  yield ctx.render('list.html', {list: data, isPC: IsPC(ctx.request.header['user-agent'])})
+
+  yield ctx.render('list.html', {list: data, isPC: IsPC(ctx.request.header['user-agent']), title:"在线视频列表"})
 }
 
 function IsPC (userAgentInfo) {

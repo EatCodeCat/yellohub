@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% block title %}{{title}}{% endblock %}
 {% block content %}
     <div class="am_tuya">
         <div class="am_tuya_user">
@@ -50,12 +50,12 @@
                 {% for item in list %}
                 <li>
                     <div class="am-gallery-item am_list_block">
-                        <a href="/detail/{{item._id}}" class="am_img_bg">
+                        <a href="http://www.iyehub.com/detail/{{item._id}}" class="am_img_bg">
                             <img class="am_img" src="/img/loading.gif"
                                 data-original="{{item.thumb_pic}}"
                                 alt="{{item.title}}"/>
                         </a>
-                       <a href="/detail/{{item._id}}" > <span class=am-item-title>{{item.title}}</span></a>
+                       <a href="http://www.iyehub.com/detail/{{item._id}}" > <span class=am-item-title>{{item.title}}</span></a>
                         <div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span class="am-icon-comments"> 67</span><span class="am_imglist_time">15分钟前</span></div>
                     </div>
                 </li>
