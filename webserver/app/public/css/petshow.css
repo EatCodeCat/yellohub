@@ -2655,5 +2655,8 @@ a:hover {
     background: #f90;
     border-radius: 4px;
     padding: 0px 4px;
-    color:#333
+    color:#333333
+}
+.tag{
+    cursor: pointer
 }

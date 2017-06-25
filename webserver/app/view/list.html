@@ -10,8 +10,8 @@
       <div class="am-list-news-bd am_news_list_all video-list">
         <DIV class="am-list-key">视频列表 <div class="sort" style="float:right">
           <button type="button" class="am-btn am-btn-warning am-btn-xs">更新时间</button>
-          <button type="button" class="am-btn am-btn-warning am-btn-xs">好评</button>
-          <button type="button" class="am-btn am-btn-warning am-btn-xs" >浏览量</button>
+          <!--<button type="button" class="am-btn am-btn-warning am-btn-xs">好评</button>
+          <button type="button" class="am-btn am-btn-warning am-btn-xs" >浏览量</button>-->
           </div></DIV>
         <ul data-am-widget="gallery" id=list class="am-gallery  am-avg-sm-3 am-avg-sm-1 am-gallery-default">
           {% for item in list %}
@@ -35,13 +35,13 @@
                 </div>
                 {% endif %}
               </div>
-              <a class="list-item-title" href="http://www.iyehub.com/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
+              <a class="list-item-title" href="{{_host_}}/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
               <div class="am_listimg_info"><span onclick="like('{{item._id}}')" class="am-icon-heart"> 132</span>
               <span class="am-icon-thumbs-o-down" onclick="hate('{{item._id}}')"> 67</span>
               <span class="am-icon-eye"> 132</span>
               <span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
               <div class=tag-title><strong>标签:</strong> {% for tag in item.tag_list %}
-                <a class="tag" href=""><span>{{tag}}</span></a> {% endfor %}
+                <a class="tag"><span>{{tag}}</span></a> {% endfor %}
               </div>
             </div>
           </li>
@@ -74,13 +74,17 @@
     }
     var page = 2
     $('.am_news_load').click(function () {
-      $.get('/api/list/' + page++, function (data) {
+      var m = location.href.match(/(params=[^&]+)/)
+      if(m){
+        var params = m[0]
+      }
+      $.get('/api/list?page=' + page++ + "&" + params, function (data) {
 
         for (var i = 0; i < data.length; i++) {
           var item = data[i]
           var tagList = ''
           for (var k = 0; k < item.tag_list.length; k++) {
-            tagList += '<a class="tag" href=""><span>' + item.tag_list[k] + '</span></a> '
+            tagList += '<a class="tag" ><span>' + item.tag_list[k] + '</span></a> '
           }
           var content =
             `<div  class="am_img_bg">
@@ -113,7 +117,7 @@
             <div class="am-gallery-item am_list_block">
               ${content}
               <a href="/detail/{{item._id}}" class="list-item-title"></a><span class=am-item-title>${item.title}</span>
-              <div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span class="am-icon-comments"> 67</span><span class="am_imglist_time">15分钟前</span></div>
+              <div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span class="am-icon-comments"> 67</span><span class="am_imglist_time">${time2ago(item.update_time)}</span></div>
               <div class=tag-title><strong>标签:</strong> 
                 ${tagList}
               </div>

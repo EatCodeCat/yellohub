@@ -4,8 +4,14 @@ module.exports = app => {
       let result = yield this.ctx.model.Video.find({})
       return result
     }
-    * findByPage (index = 0, page=20) {
-      let result = yield this.ctx.model.Video.find({}).skip(index*page).limit(page)
+    * findByPage (index = 0, page=20, params = {}, sort={update_time:1}) {
+
+      if(params.title){
+        params.title = {$regex:params.title}
+      }
+   
+      console.log(params)
+      let result = yield this.ctx.model.Video.find(params).sort(sort).skip(index*page).limit(page)
       return result
     }
     * findById (id) {

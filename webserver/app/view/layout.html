@@ -21,9 +21,9 @@
 <body>
     <header class="am-topbar am-topbar-inverse">
         <div class="search">
-            <form class="cse-form">
-                <input type="text" name="q" placeholder="搜索视频、图片、文章" autocomplete="off">
-                <button><span class="am-icon-search am-icon-sm"></span></button></form>
+            <div class="cse-form">
+                <input type="text" name="q" id="q" placeholder="搜索视频、图片、文章" autocomplete="off">
+                <button id="searchbtn"><span class="am-icon-search am-icon-sm"></span></button></div>
         </div>
         <div class="amz-container">
             <h1 class="am-topbar-brand">
@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li >
-                        <a href="http://www.iyehub.com/list/0">
+                        <a href="{{_host_}}/list">
                         视频列表
                         </a>
 

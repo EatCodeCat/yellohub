@@ -13,8 +13,9 @@ exports.detail = function * (ctx) {
   yield ctx.render('detail.html', {list: data, entity: entity, title:entity.title})
 }
 exports.list = function * (ctx) {
-  var page = ctx.params.page || 1
-  var data = yield ctx.service.video.findByPage(page, 12)
+  var query = ctx.query
+  var params = JSON.parse(query.params || '{}')
+  var data = yield ctx.service.video.findByPage(query.page || 0, 12, params, query.sort)
   console.log(IsPC(ctx.request.header['user-agent']))
 
   yield ctx.render('list.html', {list: data, isPC: IsPC(ctx.request.header['user-agent']), title:"在线视频列表"})

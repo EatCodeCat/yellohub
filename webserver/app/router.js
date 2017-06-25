@@ -3,8 +3,8 @@
 module.exports = app => {
   app.get('/', 'home.index');
   app.get('/detail/:id', 'home.detail');
-  app.get('/list/:page', 'home.list');
+  app.get('/list', 'home.list');
 
   //json
-  app.get('/api/list/:page', 'api.list');
+  app.get('/api/list', 'api.list');
 };
