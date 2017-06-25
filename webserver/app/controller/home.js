@@ -14,15 +14,17 @@ exports.detail = function * (ctx) {
   entity.tag_list.forEach(function(element) {
     param.$or.push({'tag_list':element}) 
   });
-  var data = yield ctx.service.video.findByPage(0, 8, param)
-  yield ctx.render('detail.html', {list: data, entity: entity, title:entity.title})
+  var data = yield ctx.service.video.findByPage(0, 9, param)
+  data = data.filter(function(item){
+    return String(item._id) != String(entity._id)
+
+  })
+  yield ctx.render('detail.html', {list: data.slice(0,8), entity: entity, title:entity.title})
 }
 exports.list = function * (ctx) {
-  var query = ctx.query
-  var params = JSON.parse(query.params || '{}')
-  var data = yield ctx.service.video.findByPage(query.page || 0, 12, params, query.sort)
-  console.log(IsPC(ctx.request.header['user-agent']))
-
+  var page = ctx.query.page || 0
+  var params = JSON.parse(ctx.query.params || '{}')
+  var data = yield ctx.service.video.findByPage(page, 12, params, ctx.query.sort)
   yield ctx.render('list.html', {list: data, isPC: IsPC(ctx.request.header['user-agent']), title:"在线视频列表"})
 }
 
