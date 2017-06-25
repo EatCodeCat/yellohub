@@ -8,8 +8,13 @@ exports.index = function * (ctx) {
 }
 exports.detail = function * (ctx) {
   var id = ctx.params.id
-  var data = yield ctx.service.video.findByPage(0, 8)
+ 
   var entity = yield ctx.service.video.findById(id)
+  var param = {$or:[]};
+  entity.tag_list.forEach(function(element) {
+    param.$or.push({'tag_list':element}) 
+  });
+  var data = yield ctx.service.video.findByPage(0, 8, param)
   yield ctx.render('detail.html', {list: data, entity: entity, title:entity.title})
 }
 exports.list = function * (ctx) {
