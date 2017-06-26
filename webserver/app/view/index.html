@@ -26,7 +26,7 @@
 
                 <a href="{{_host_}}/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
                 <div class="am_listimg_info"><span class="am-icon-heart"> 132</span>
-                    <span class="am-icon-thumbs-o-down"> 67</span>
+                    <span class="am-icon-thumbs-o-down"> {{item.video_count}}</span>
                     <span class="am-icon-eye"> 67</span><span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
             </div>
         </li>
