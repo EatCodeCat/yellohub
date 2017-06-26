@@ -7,4 +7,5 @@ module.exports = app => {
 
   //json
   app.get('/api/list', 'api.list');
+  app.get('/api/incVideoCount/:id', 'api.incVideoCount');
 };

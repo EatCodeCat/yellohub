@@ -9,13 +9,15 @@ module.exports = app => {
       if(params.title){
         params.title = {$regex:params.title}
       }
-   
-      console.log(params)
       let result = yield this.ctx.model.Video.find(params).sort(sort).skip(index*page).limit(page)
       return result
     }
     * findById (id) {
       let result = yield this.ctx.model.Video.findById(id)
+      return result
+    }
+    * incVideoCount(_id){
+      let result = yield this.ctx.model.Video.update({_id:_id}, {$inc:{video_count:1}})
       return result
     }
   }

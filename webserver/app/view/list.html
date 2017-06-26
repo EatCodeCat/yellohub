@@ -38,7 +38,7 @@
               <a class="list-item-title" href="{{_host_}}/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
               <div class="am_listimg_info"><span onclick="like('{{item._id}}')" class="am-icon-heart"> 132</span>
               <span class="am-icon-thumbs-o-down" onclick="hate('{{item._id}}')"> 67</span>
-              <span class="am-icon-eye"> 132</span>
+              <span class="am-icon-eye"> {{item.video_count}}</span>
               <span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
               <div class=tag-title><strong>标签:</strong> {% for tag in item.tag_list %}
                 <a class="tag"><span>{{tag}}</span></a> {% endfor %}
@@ -56,11 +56,13 @@
 <script src="http://vjs.zencdn.net/6.1.0/video.js"></script>
 <script>
   $('video').each(function(){
-        var player = videojs($(this).attr('id'));
+        var player = videojs($(this).attr('id'), function(){
+          this.on('play', function(){
+                $.get('/api/incVideoCount/{{entity._id}}');
+            })
+        });
     })
   $(function () {
-
-    
 
     
     $('.am_news_tab').css('min-height', $(window).height() - 52 - 220);
@@ -117,7 +119,9 @@
             <div class="am-gallery-item am_list_block">
               ${content}
               <a href="/detail/{{item._id}}" class="list-item-title"></a><span class=am-item-title>${item.title}</span>
-              <div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span class="am-icon-comments"> 67</span><span class="am_imglist_time">${time2ago(item.update_time)}</span></div>
+              <div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span class="am-icon-comments"> 67</span>
+              <span class="am-icon-eye"> ${item.video_count || 0}</span>
+              <span class="am_imglist_time">${time2ago(item.update_time)}</span></div>
               <div class=tag-title><strong>标签:</strong> 
                 ${tagList}
               </div>
@@ -125,7 +129,11 @@
           </li>`
           )
           if (!IsPC()) {
-            var player = videojs('my-player' + page + i);
+            var player = videojs('my-player' + page + i, function(){
+              this.on('play', function(){
+                $.get('/api/incVideoCount/{{entity._id}}');
+            })
+            });
           }
 
         }

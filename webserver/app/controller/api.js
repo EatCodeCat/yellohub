@@ -6,6 +6,11 @@ exports.list = function*(ctx) {
         .video
         .findByPage(page, 12, params)
 }
-exports.videolike = function*() {
+exports.incVideoCount = function *(ctx){
+    var id = ctx.params.id
+    ctx.body = yield ctx
+        .service.video.incVideoCount(id)
+}
+exports.videolike = function*(ctx) {
 
 }

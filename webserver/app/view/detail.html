@@ -28,7 +28,7 @@
                 <ul class="am_tuya_r_info">
                     <li onclick="like('{{entity._id}}')"><i class="am-icon-heart"></i><span>10</span></li>
                     <li onclick="hate('{{entity._id}}')"><i class="am-icon-thumbs-o-down"></i><span>4</span></li>
-                    <li><i class="am-icon-eye"></i><span>126 次查看</span></li>
+                    <li><i class="am-icon-eye"></i><span id="video_count">{{entity.video_count}}</span></li>
                 </ul>
                 <div style="clear:both"></div>
                 <div class=tag-title><strong>标签:</strong></div>
@@ -56,7 +56,9 @@
                                 alt="{{item.title}}"/>
                         </a>
                        <a href="{{_host_}}/detail/{{item._id}}" > <span class=am-item-title>{{item.title}}</span></a>
-                        <div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span class="am-icon-comments"> 67</span><span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
+                        <div class="am_listimg_info">
+                            <span class="am-icon-heart"> 132</span>
+                            <span class="am-icon-comments"> 67</span><span class="am-icon-eye"> {{item.video_count}}</span><span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
                     </div>
                 </li>
                 {% endfor %}
@@ -77,6 +79,10 @@
                     });
             }
             var player = videojs('my-player');
+            player.on('play', function(){
+                $.get('/api/incVideoCount/{{entity._id}}');
+                $("#video_count").html(parseInt($("#video_count").text())+1)
+            })
         });
  
     </script>
