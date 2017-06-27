@@ -70,6 +70,25 @@ $ (function(){
         e.stopPropagation ();
         location.href = '/list?params=' + encodeURIComponent (JSON.stringify ({tag_list: $ (this).text ()}));
     });
+    $ ('.sort button').click (function(e){
+        e.stopPropagation ();
+
+        var reg = /sort=[^&]+/;
+        var href = location.href
+        var sort = {};
+        sort[$(this).attr('sort')] = $(this).attr('value') * -1;
+        if(reg.test(location.href)){
+
+            href = location.href.replace (/sort=[^&]+/, 'sort=' + JSON.stringify(sort))
+        }
+        else{
+            if(href.indexOf('?') == -1){
+                href = href + "?"
+            }
+            href = href + 'sort=' + encodeURIComponent(JSON.stringify(sort));
+        }
+        location.href = href
+    });
 
 
 });

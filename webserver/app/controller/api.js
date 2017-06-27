@@ -1,10 +1,11 @@
 exports.list = function*(ctx) {
     var page = ctx.query.page || 0
     var params = JSON.parse(ctx.query.params || '{}')
+    var sort = JSON.parse(ctx.query.sort || '{}')
     ctx.body = yield ctx
         .service
         .video
-        .findByPage(page, 12, params)
+        .findByPage(page, 12, params, sort)
 }
 exports.incVideoCount = function*(ctx) {
     var id = ctx.params.id

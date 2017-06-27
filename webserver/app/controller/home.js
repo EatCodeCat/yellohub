@@ -38,7 +38,8 @@ exports.detail = function*(ctx) {
 exports.list = function*(ctx) {
     var page = ctx.query.page || 0
     var params = JSON.parse(ctx.query.params || '{}')
-    var data = yield ctx.service.video.findByPage(page, 12, params, ctx.query.sort)
+    var sort = JSON.parse(ctx.query.sort || '{}')
+    var data = yield ctx.service.video.findByPage(page, 12, params, sort)
     yield ctx.render('list.html', {
         list: data,
         isPC: IsPC(ctx.request.header['user-agent']),
