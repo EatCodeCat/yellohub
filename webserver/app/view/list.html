@@ -1,150 +1,154 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
 {% block title %}{{title}}{% endblock %}
 {% block content %}
 <div class="am-tabs am-tabs-d2 am_news_tab">
 
-  <div class="am-tabs-bd">
+    <div class="am-tabs-bd">
 
-    <div>
+        <div>
 
-      <div class="am-list-news-bd am_news_list_all video-list">
-        <DIV class="am-list-key">视频列表 <div class="sort" style="float:right">
-          <button type="button" class="am-btn am-btn-warning am-btn-xs">更新时间</button>
-          <!--<button type="button" class="am-btn am-btn-warning am-btn-xs">好评</button>
-          <button type="button" class="am-btn am-btn-warning am-btn-xs" >浏览量</button>-->
-          </div></DIV>
-        <ul data-am-widget="gallery" id=list class="am-gallery  am-avg-sm-3 am-avg-sm-1 am-gallery-default">
-          {% for item in list %}
-          <li onclick="godetail('{{item._id}}')">
-            <div class="am-gallery-item am_list_block">
-              <div class="am_img_bg">
-                {%if isPC %}
-                <img class="am_img" src="{{item.thumb_pic}}" alt="{{item.title}}" /> {%else %}
-                <div class="am_albums" id="play-video{{loop.index}}">
-                  <video id="my-player{{loop.index}}" class="video-js" controls preload="auto" poster="{{item.poster}}" data-setup='{}'>
-                    {% for s in item.video_url_list %}
-                    <source src="{{s.src}}" label="{{s.label}}" res="{{s.res}}" type="video/mp4"></source>
-                    {% endfor %}
-                    <p class="vjs-no-js">
-                      To view this video please enable JavaScript, and consider upgrading to a web browser that
-                      <a href="http://videojs.com/html5-video-support/" target="_blank">
-                                    supports HTML5 video
-                            </a>
-                    </p>
-                  </video>
-                </div>
-                {% endif %}
-              </div>
-              <a class="list-item-title" href="{{_host_}}/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
-              <div class="am_listimg_info"><span onclick="like('{{item._id}}')" class="am-icon-heart"> 132</span>
-              <span class="am-icon-thumbs-o-down" onclick="hate('{{item._id}}')"> 67</span>
-              <span class="am-icon-eye"> {{item.video_count}}</span>
-              <span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
-              <div class=tag-title><strong>标签:</strong> {% for tag in item.tag_list %}
-                <a class="tag"><span>{{tag}}</span></a> {% endfor %}
-              </div>
+            <div class="am-list-news-bd am_news_list_all video-list">
+                <DIV class="am-list-key">视频列表
+                    <div class="sort" style="float:right">
+                        <button type="button" class="am-btn am-btn-warning am-btn-xs">更新时间</button>
+                        <!--<button type="button" class="am-btn am-btn-warning am-btn-xs">好评</button>
+                        <button type="button" class="am-btn am-btn-warning am-btn-xs" >浏览量</button>-->
+                    </div>
+                </DIV>
+                <ul data-am-widget="gallery" id=list class="am-gallery  am-avg-sm-3 am-avg-sm-1 am-gallery-default">
+                    {% for item in list %}
+                    <li onclick="godetail('{{item._id}}')">
+                        <div class="am-gallery-item am_list_block">
+                            <div class="am_img_bg">
+                                {%if isPC %}
+                                <img class="am_img" src="{{item.thumb_pic}}" alt="{{item.title}}"/> {%else %}
+                                <div class="am_albums" id="play-video{{loop.index}}">
+                                    <video id="my-player{{loop.index}}" class="video-js" controls preload="auto"
+                                           poster="{{item.poster}}" data-setup='{}'>
+                                        {% for s in item.video_url_list %}
+                                        <source src="{{s.src}}" label="{{s.label}}" res="{{s.res}}" type="video/mp4"></source>
+                                        {% endfor %}
+                                        <p class="vjs-no-js">
+                                            To view this video please enable JavaScript, and consider upgrading to a web
+                                            browser that
+                                            <a href="http://videojs.com/html5-video-support/" target="_blank">
+                                                supports HTML5 video
+                                            </a>
+                                        </p>
+                                    </video>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <a class="list-item-title" href="{{_host_}}/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
+                            <span class="am-icon-thumbs-up green {% if item.like_count < item.hate_count%} red {%endif%}">{{item | formateLikeNum}}</span>
+                            <span class="am-icon-eye"> {{item.video_count}}</span>
+                            <span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
+                        <div class=tag-title><strong>标签:</strong> {% for tag in item.tag_list %}
+                            <a class="tag"><span>{{tag}}</span></a> {% endfor %}
+                        </div>
             </div>
-          </li>
-          {% endfor %}
+            </li>
+            {% endfor %}
 
-        </ul>
-        <div class="am_news_load"><span><i  class="am-icon-spinner am-icon-spin"></i> 加载更多视频</span></div>
-      </div>
+            </ul>
+            <div class="am_news_load"><span><i class="am-icon-spinner am-icon-spin"></i> 加载更多视频</span></div>
+        </div>
     </div>
-  </div>
+</div>
 </div>
 <script src="http://vjs.zencdn.net/6.1.0/video.js"></script>
 <script>
-  $('video').each(function(){
-        var player = videojs($(this).attr('id'), function(){
-          this.on('play', function(){
-                $.get('/api/incVideoCount/{{entity._id}}');
+    $ ('video').each (function(){
+        var player = videojs ($ (this).attr ('id'), function(){
+            this.on ('play', function(){
+                $.get ('/api/incVideoCount/{{entity._id}}');
             })
         });
     })
-  $(function () {
+    $ (function(){
 
-    
-    $('.am_news_tab').css('min-height', $(window).height() - 52 - 220);
-    if ($(window).width() < 600) {
-      $('.am_list_item_text').each(
-        function () {
-          if ($(this).text().length >= 26) {
-            $(this).html($(this).text().substr(0, 26) + '...');
-          }
-        });
-    }
-    var page = 2
-    $('.am_news_load').click(function () {
-      var m = location.href.match(/(params=[^&]+)/)
-      if(m){
-        var params = m[0]
-      }
-      $.get('/api/list?page=' + page++ + "&" + params, function (data) {
 
-        for (var i = 0; i < data.length; i++) {
-          var item = data[i]
-          var tagList = ''
-          for (var k = 0; k < item.tag_list.length; k++) {
-            tagList += '<a class="tag" ><span>' + item.tag_list[k] + '</span></a> '
-          }
-          var content =
-            `<div  class="am_img_bg">
+        $ ('.am_news_tab').css ('min-height', $ (window).height () - 52 - 220);
+        if ( $ (window).width () < 600 ) {
+            $ ('.am_list_item_text').each (
+                function(){
+                    if ( $ (this).text ().length >= 26 ) {
+                        $ (this).html ($ (this).text ().substr (0, 26) + '...');
+                    }
+                });
+        }
+        var page = 2
+        $ ('.am_news_load').click (function(){
+            var m = location.href.match (/(params=[^&]+)/)
+            if ( m ) {
+                var params = m[ 0 ]
+            }
+            $.get ('/api/list?page=' + page++ + "&" + params, function(data){
+
+                for ( var i = 0; i < data.length; i++ ) {
+                    var item = data[ i ]
+                    var tagList = ''
+                    for ( var k = 0; k < item.tag_list.length; k++ ) {
+                        tagList += '<a class="tag" ><span>' + item.tag_list[ k ] + '</span></a> '
+                    }
+                    var content =
+                        `<div  class="am_img_bg">
                       <img class="am_img" src="${item.thumb_pic}"
                           alt="{{item.title}}"/>
                     </div>`
-          if (!IsPC()) {
+                    if ( !IsPC () ) {
 
-            var urlList = [];
-            item.video_url_list.forEach(function (s) {
-              urlList.push(
-                ` <source src="${s.src}" label="${s.label}" res="${s.res}" type="video/mp4"></source>`
-              )
-            })
-            content =
-              `<div class="am_albums" id="play-video${page}${i}">
-                  <video id="my-player${page}${i}" class="video-js" controls preload="auto" poster="${item.poster}" data-setup='{}'>
-                    ${urlList.join('')}
-                    <p class="vjs-no-js">
-                      To view this video please enable JavaScript, and consider upgrading to a web browser that
-                      <a href="http://videojs.com/html5-video-support/" target="_blank">
-                                    supports HTML5 video
-                            </a>
-                    </p>
-                  </video>
-                </div>`
-          }
-          $('#list').append(
-            `<li onclick="godetail('${item._id}')">
-            <div class="am-gallery-item am_list_block">
-              ${content}
-              <a href="/detail/{{item._id}}" class="list-item-title"></a><span class=am-item-title>${item.title}</span>
-              <div class="am_listimg_info"><span class="am-icon-heart"> 132</span><span class="am-icon-comments"> 67</span>
-              <span class="am-icon-eye"> ${item.video_count || 0}</span>
-              <span class="am_imglist_time">${time2ago(item.update_time)}</span></div>
-              <div class=tag-title><strong>标签:</strong> 
-                ${tagList}
-              </div>
-            </div>
-          </li>`
-          )
-          if (!IsPC()) {
-            var player = videojs('my-player' + page + i, function(){
-              this.on('play', function(){
-                $.get('/api/incVideoCount/{{entity._id}}');
-            })
-            });
-          }
+                        var urlList = [];
+                        item.video_url_list.forEach (function(s){
+                            urlList.push (
+                                ` <source src="${s.src}" label="${s.label}" res="${s.res}" type="video/mp4"></source>`
+                            )
+                        })
+                        content =
+                            `<div class="am_albums" id="play-video${page}${i}">
+                                  <video id="my-player${page}${i}" class="video-js" controls preload="auto" poster="${item.poster}" data-setup='{}'>
+                                    ${urlList.join ('')}
+                                    <p class="vjs-no-js">
+                                      To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                      <a href="http://videojs.com/html5-video-support/" target="_blank">
+                                                    supports HTML5 video
+                                            </a>
+                                    </p>
+                                  </video>
+                                </div>`
+                    }
+                    $ ('#list').append (
+                        `<li onclick="godetail('${item._id}')">
+                            <div class="am-gallery-item am_list_block">
+                              ${content}
+                              <a href="/detail/{{item._id}}" class="list-item-title"></a><span class=am-item-title>${item.title}</span>
+                              <div class="am_listimg_info">
+                              <span class="am-icon-thumbs-up green ${item.like_count < item.hate_count?'red':'green'} ">${formateLikeNum(item)}</span>
+                              <span class="am-icon-eye"> ${item.video_count || 0}</span>
+                              <span class="am_imglist_time">${time2ago (item.update_time)}</span></div>
+                              <div class=tag-title><strong>标签:</strong>
+                                ${tagList}
+                              </div>
+                            </div>
+                         </li>`
+                    )
+                    if ( !IsPC () ) {
+                        var player = videojs ('my-player' + page + i, function(){
+                            this.on ('play', function(){
+                                $.get ('/api/incVideoCount/{{entity._id}}');
+                            })
+                        });
+                    }
 
+                }
+            })
+        })
+    });
+
+    function godetail (id){
+        if ( IsPC () ) {
+            location.href = '/detail/' + id;
         }
-      })
-    })
-  });
-
-  function godetail(id) {
-    if (IsPC()) {
-      location.href = '/detail/' + id;
     }
-  }
 </script>
 {%endblock%}

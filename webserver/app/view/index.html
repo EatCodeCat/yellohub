@@ -25,8 +25,8 @@
                 </a>
 
                 <a href="{{_host_}}/detail/{{item._id}}"><span class=am-item-title>{{item.title}}</span></a>
-                <div class="am_listimg_info"><span class="am-icon-heart"> 132</span>
-                    <span class="am-icon-thumbs-o-down"> 10</span>
+                <div class="am_listimg_info">
+                    <span class="am-icon-thumbs-up green {% if item.like_count < item.hate_count%} red {%endif%}">{{item | formateLikeNum}}</span>
                     <span class="am-icon-eye"> {{item.video_count}}</span><span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
             </div>
         </li>

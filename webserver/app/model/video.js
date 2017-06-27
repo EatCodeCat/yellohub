@@ -9,7 +9,9 @@ module.exports = app => {
         "tag_list": Array,
         "video_type": String,
         'update_time': Date,
-        'video_count': Number
+        'video_count': { type: Number, default: 0 },
+        'like_count': { type: Number, default: 0 },
+        'hate_count': { type: Number, default: 0 },
     });
     return mongoose.model('Video', VideoSchema);
 }

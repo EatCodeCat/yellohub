@@ -16,3 +16,16 @@ exports.time2ago = function(str) {
         return Math.round(dist / (3600 * 24 * 1000 * 365)) + '年前'
     }
 }
+
+exports.formateLikeNum = function(item) {
+
+    let total = (item.like_count + item.hate_count)
+    if (total == 0) {
+        return 0;
+    }
+
+    let rate = item.like_count / total * 100;
+
+    return `${rate}%(${item.like_count}/${total})`
+
+}

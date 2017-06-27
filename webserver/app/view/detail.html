@@ -1,90 +1,96 @@
 {% extends "layout.html" %}
 {% block title %}{{title}}{% endblock %}
 {% block content %}
-    <div class="am_tuya">
-        <div class="am_tuya_user">
-            <div class="am_tuya_user_info">
-                <div class="am_tuya_user_info_name">{{entity.title}}</div>
-            </div>
-        </div>
-
-        <div class="am_tuya_content">
-            <div class="am_tuya_content_l">
-                <div class="am_albums" id="play-video">
-                    <video id="my-player" class="video-js" controls preload="auto" poster="{{entity.poster}}" data-setup='{}'>
-                        {% for s in entity.video_url_list %}
-                        <source src="{{s.src}}" label="{{s.label}}" res="{{s.res}}" type="video/mp4"></source>
-                        {% endfor %}
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to a web browser that
-                            <a href="http://videojs.com/html5-video-support/" target="_blank">
-                                    supports HTML5 video
-                            </a>
-                        </p>
-                    </video>
-                </div>
-            </div>
-            <div class="am-video-info">
-                <ul class="am_tuya_r_info">
-                    <li onclick="like('{{entity._id}}')"><i class="am-icon-heart"></i><span>10</span></li>
-                    <li onclick="hate('{{entity._id}}')"><i class="am-icon-thumbs-o-down"></i><span>4</span></li>
-                    <li><i class="am-icon-eye"></i><span id="video_count">{{entity.video_count}}</span></li>
-                </ul>
-                <div style="clear:both"></div>
-                <div class=tag-title><strong>标签:</strong></div>
-                <ul class="am_tuya_tag">
-                     {% for tag in entity.tag_list %}
-                        <li><a class=tag><span >{{tag}}</span></a></li>
-                     {% endfor %}
-                </ul>
-
-            </div>
+<div class="am_tuya">
+    <div class="am_tuya_user">
+        <div class="am_tuya_user_info">
+            <div class="am_tuya_user_info_name">{{entity.title}}</div>
         </div>
     </div>
-    </div>
-    </div>
-    <div class="am_tuya_cai">
-        <div class="am_tuya_cai_ti">猜你喜欢</div>
-        <div class="am-g am-imglist">
-            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-lg-4 am-gallery-default">
-                {% for item in list %}
-                <li>
-                    <div class="am-gallery-item am_list_block">
-                        <a href="{{_host_}}/detail/{{item._id}}" class="am_img_bg">
-                            <img class="am_img" src="/img/loading.gif"
-                                data-original="{{item.thumb_pic}}"
-                                alt="{{item.title}}"/>
+
+    <div class="am_tuya_content">
+        <div class="am_tuya_content_l">
+            <div class="am_albums" id="play-video">
+                <video id="my-player" class="video-js" controls preload="auto" poster="{{entity.poster}}"
+                       data-setup='{}'>
+                    {% for s in entity.video_url_list %}
+                    <source src="{{s.src}}" label="{{s.label}}" res="{{s.res}}" type="video/mp4"></source>
+                    {% endfor %}
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">
+                            supports HTML5 video
                         </a>
-                       <a href="{{_host_}}/detail/{{item._id}}" > <span class=am-item-title>{{item.title}}</span></a>
-                        <div class="am_listimg_info">
-                            <span class="am-icon-heart"> 132</span>
-                            <span class="am-icon-comments"> 67</span><span class="am-icon-eye"> {{item.video_count}}</span><span class="am_imglist_time">{{item.update_time | time2ago}}</span></div>
-                    </div>
-                </li>
-                {% endfor %}
-
+                    </p>
+                </video>
+            </div>
+        </div>
+        <div class="am-video-info">
+            <ul class="am_tuya_r_info">
+                <li onclick="like('{{entity._id}}')" title="喜欢该视频"><i
+                        class="am-icon-thumbs-up  am-icon-sm green"></i><span>{{entity.like_count}}</span></li>
+                <li onclick="hate('{{entity._id}}')" title="该视频不咋样"><i
+                        class="am-icon-thumbs-down  am-icon-sm red"></i><span>{{entity.hate_count}}</span></li>
+                <li><i class="am-icon-eye"></i><span id="video_count">{{entity.video_count}}</span></li>
             </ul>
-            <!--<a class="like-more">更多喜欢 ></a>-->
+            <div style="clear:both"></div>
+            <div class=tag-title><strong>标签:</strong></div>
+            <ul class="am_tuya_tag">
+                {% for tag in entity.tag_list %}
+                <li><a class=tag><span>{{tag}}</span></a></li>
+                {% endfor %}
+            </ul>
+
         </div>
     </div>
-    <script src="http://vjs.zencdn.net/6.1.0/video.js"></script>
-    <script>
-        $(function () {
-            if ($(window).width() < 600) {
-                $('.am_list_item_text').each(
-                    function () {
-                        if ($(this).text().length >= 26) {
-                            $(this).html($(this).text().substr(0, 26) + '...');
-                        }
-                    });
-            }
-            var player = videojs('my-player');
-            player.on('play', function(){
-                $.get('/api/incVideoCount/{{entity._id}}');
-                $("#video_count").html(parseInt($("#video_count").text())+1)
-            })
-        });
- 
-    </script>
-   
-    {%endblock%}
+</div>
+</div>
+</div>
+<div class="am_tuya_cai">
+    <div class="am_tuya_cai_ti">猜你喜欢</div>
+    <div class="am-g am-imglist">
+        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-lg-4 am-gallery-default">
+            {% for item in list %}
+            <li>
+                <div class="am-gallery-item am_list_block">
+                    <a href="{{_host_}}/detail/{{item._id}}" class="am_img_bg">
+                        <img class="am_img" src="/img/loading.gif"
+                             data-original="{{item.thumb_pic}}"
+                             alt="{{item.title}}"/>
+                    </a>
+                    <a href="{{_host_}}/detail/{{item._id}}"> <span class=am-item-title>{{item.title}}</span></a>
+                    <div class="am_listimg_info">
+                        <span class="am-icon-thumbs-up green {% if item.like_count < item.hate_count%} red {%endif%}">{{item | formateLikeNum}}</span><span
+                            class="am-icon-eye"> {{item.video_count}}</span><span class="am_imglist_time">{{item.update_time | time2ago}}</span>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+
+        </ul>
+        <!--<a class="like-more">更多喜欢 ></a>-->
+    </div>
+</div>
+<script src="http://vjs.zencdn.net/6.1.0/video.js"></script>
+<script>
+    $ (function(){
+        if ( $ (window).width () < 600 ) {
+            $ ('.am_list_item_text').each (
+                function(){
+                    if ( $ (this).text ().length >= 26 ) {
+                        $ (this).html ($ (this).text ().substr (0, 26) + '...');
+                    }
+                });
+        }
+        var player = videojs ('my-player');
+        player.on ('play', function(){
+            $.get ('/api/incVideoCount/{{entity._id}}');
+            $ ("#video_count").html (parseInt ($ ("#video_count").text ()) + 1)
+        })
+
+
+    });
+
+</script>
+
+{%endblock%}

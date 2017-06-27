@@ -304,7 +304,7 @@ ul.am-dropdown-content>li>a:hover {
     bottom: 9px;
     right: 6px;
     margin-right: 0;
-    color:#fff;
+    color: #fff;
 }
 
 .am_imglist_user {
@@ -2156,7 +2156,6 @@ ul.am-tabs-nav.am-cf.am_cf {
     .font_line img {
         width: 250px;
     }
-    
     .article_nr .am_list_author {
         display: block;
     }
@@ -2547,7 +2546,8 @@ a:hover {
     margin-left: 23px;
     margin-top: 5px;
 }
-.am-list-key .sort{
+
+.am-list-key .sort {
     float: right;
     margin-right: 12px;
 }
@@ -2603,17 +2603,17 @@ a:hover {
     padding-bottom: 10px;
     cursor: pointer;
 }
+
 .video-list .am-icon-play-circle-o {
-        display: none;
+    display: none;
 }
 
 @media only screen and (max-width: 700px) {
     .video-list .am-avg-sm-1>li {
         width: 100%
     }
-    .video-list .am_img_bg{
+    .video-list .am_img_bg {
         position: relative;
-
     }
     .video-list .am-icon-play-circle-o {
         font-size: 42px;
@@ -2626,37 +2626,63 @@ a:hover {
     }
 }
 
-
 .video-js {
     width: 100%;
     height: 350px;
 }
-.video-list li .video-js{
+
+.video-list li .video-js {
     height: 250px;
 }
-.video-list li .list-item-title{
-        display: block;
-        color: #fff
+
+.video-list li .list-item-title {
+    display: block;
+    color: #fff
 }
-.video-list li .video-js .vjs-tech{
+
+.video-list li .video-js .vjs-tech {
     position: relative
 }
-.video-list .am-gallery{
+
+.video-list .am-gallery {
     padding: 2px;
 }
-.am-icon-heart{
-    color:#ff0000
+
+.am-icon-heart {
+    color: #ff0000
 }
-.logo strong:nth-child(1){
+
+.logo strong:nth-child(1) {
     font-size: 28px;
 }
-.logo strong:nth-child(2){
+
+.logo strong:nth-child(2) {
     font-size: 28px;
     background: #f90;
     border-radius: 4px;
     padding: 0px 4px;
-    color:#333333
+    color: #333333
 }
-.tag{
+
+.tag {
     cursor: pointer
+}
+
+.green {
+    color: #009966;
+}
+
+.red {
+    color: #FF6666;
+}
+
+.am_listimg_info span::before {
+    margin-right: 3px;
+}
+.am_tuya_r_info li i{
+    font-size: 20px;
+}
+.am_tuya_r_info li i:hover{
+    background-color: #888;
+    cursor: pointer;
 }
