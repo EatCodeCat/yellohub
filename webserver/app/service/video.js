@@ -7,7 +7,7 @@ module.exports = app =>{
         }
 
         * findByPage (index = 0, page = 20, params = {}, sort = {
-            update_time: 1
+            update_time: -1
         }){
 
             if ( params.title ) {

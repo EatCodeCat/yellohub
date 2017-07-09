@@ -26,6 +26,6 @@ exports.formateLikeNum = function(item) {
 
     let rate = item.like_count / total * 100;
 
-    return `${rate}%(${item.like_count}/${total})`
+    return `${rate.toFixed(1)}%(${item.like_count}/${total})`
 
 }

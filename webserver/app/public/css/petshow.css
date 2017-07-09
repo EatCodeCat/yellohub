@@ -966,7 +966,7 @@ ul.am-tabs-nav.am-cf.am_cf {
 }
 
 .am_tuya_r_info li i {
-    width: 38px;
+    width:28px;
     height: 38px;
 }
 
@@ -2501,6 +2501,8 @@ ul.am-tabs-nav.am-cf.am_cf {
 .am-video-info .am_tuya_r_info li {
     float: left;
     margin-top: 8px;
+    margin-bottom: 8px;
+    width: 40px;
 }
 
 .am-video-info .am_tuya_tag li {
@@ -2682,7 +2684,7 @@ a:hover {
 .am_tuya_r_info li i{
     font-size: 20px;
 }
-.am_tuya_r_info li i:hover{
+.am_tuya_r_info li:hover{
     background-color: #888;
     cursor: pointer;
 }
